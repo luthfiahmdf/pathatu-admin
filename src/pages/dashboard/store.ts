@@ -1,0 +1,56 @@
+import { Payment } from "./columns";
+
+export const MockCard = [
+  {
+    title: "Jumlah KK",
+    color: "red-500",
+    value: 200,
+  },
+  {
+    title: "Jumlah Warga",
+    color: "teal-400",
+    value: 400,
+  },
+  {
+    title: "Warga RT 01",
+    color: "emerald-400",
+    value: 150,
+  },
+  {
+    title: "Warga RT 02",
+    color: "amber-400",
+    value: 250,
+  },
+];
+export const MockBook: Payment[] = [
+  { id: "book001", title: "The Lost Letter", category: "Romance", bookSource: "Dina" },
+  { id: "book002", title: "Shadows of the Past", category: "Thriller", bookSource: "Raka" },
+  { id: "book003", title: "Kocak", category: "Comedy", bookSource: "Rahmat" },
+  { id: "book004", title: "Whispers in the Wind", category: "Drama", bookSource: "Yanti" },
+  { id: "book005", title: "30 Minutes Walk", category: "Romance", bookSource: "Jajang" },
+  { id: "book006", title: "Galaxy of Fire", category: "Sci-Fi", bookSource: "Roni" },
+  { id: "book007", title: "Midnight Confession", category: "Mystery", bookSource: "Mira" },
+  { id: "book008", title: "Once Upon a Curse", category: "Fantasy", bookSource: "Lina" },
+  { id: "book009", title: "Love Undercover", category: "Romance", bookSource: "Dika" },
+  { id: "book010", title: "The Last Riddle", category: "Mystery", bookSource: "Sari" },
+  { id: "book011", title: "Alien Sushi", category: "Comedy", bookSource: "Hendra" },
+  { id: "book012", title: "Memoirs of a Cat", category: "Slice of Life", bookSource: "Nana" },
+  { id: "book013", title: "The King's Assassin", category: "Fantasy", bookSource: "Gilang" },
+  { id: "book014", title: "The Coffee Shop Next Door", category: "Romance", bookSource: "Tari" },
+  { id: "book015", title: "The Forgotten Island", category: "Adventure", bookSource: "Rina" },
+  { id: "book016", title: "Deadlock", category: "Thriller", bookSource: "Arif" },
+  { id: "book017", title: "Laughing with Ghosts", category: "Comedy", bookSource: "Yoga" },
+  { id: "book018", title: "Project Nebula", category: "Sci-Fi", bookSource: "Farhan" },
+  { id: "book019", title: "Under the Sakura Tree", category: "Romance", bookSource: "Yuki" },
+  { id: "book020", title: "Echoes of the Deep", category: "Mystery", bookSource: "Randy" },
+  { id: "book021", title: "Bumi di Atas Langit", category: "Fantasy", bookSource: "Tono" },
+  { id: "book022", title: "Tukang Bakso Berdasi", category: "Comedy", bookSource: "Ajeng" },
+  { id: "book023", title: "Blue Rain", category: "Drama", bookSource: "Irfan" },
+  { id: "book024", title: "Cyber Love", category: "Romance", bookSource: "Vina" },
+  { id: "book025", title: "The Secret Keeper", category: "Thriller", bookSource: "Lukman" },
+  { id: "book026", title: "Potion & Problems", category: "Fantasy", bookSource: "Nadia" },
+  { id: "book027", title: "Kucing-Kucingan Cinta", category: "Romance", bookSource: "Bayu" },
+  { id: "book028", title: "Detektif di Hari Minggu", category: "Mystery", bookSource: "Raisa" },
+  { id: "book029", title: "Senyum di Balik Hujan", category: "Drama", bookSource: "Eka" },
+  { id: "book030", title: "KKN di Planet Mars", category: "Comedy", bookSource: "Anwar" },
+];
