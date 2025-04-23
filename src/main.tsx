@@ -7,7 +7,7 @@ import { ThemeProvider } from "./components/themes-provider";
 import { Dashboard } from "./pages/dashboard";
 import { CategoryPage } from "./pages/category";
 import { BooksPage } from "./pages/books";
-import { BooksSourcePage } from "./pages/BooksSource";
+import { BookSourcePage } from "./pages/BooksSource";
 
 const Router = createBrowserRouter([
   {
@@ -31,7 +31,7 @@ const Router = createBrowserRouter([
       },
       {
         path: "/dashboard/books-source",
-        element: <BooksSourcePage />,
+        element: <BookSourcePage />,
       },
     ],
   },

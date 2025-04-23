@@ -9,13 +9,12 @@ import {
 
 import { useEffect } from "react";
 
-import { useTableParams } from "../../pages/dashboard/useTableParams";
-
 import { Table } from "@/components/ui/table";
 import { TableToolbar } from "@/components/data-table/table-toolbar";
 import { DataTableHeader } from "@/components/data-table/table-header";
 import { DataTableBody } from "@/components/data-table/table-body";
 import { TablePagination } from "@/components/data-table/table-pagination";
+import { useTableParams } from "@/hooks/useTableParams";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
