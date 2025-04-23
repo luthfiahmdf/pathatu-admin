@@ -23,6 +23,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { DataTable } from "@/components/data-table";
+import { bookSources } from "../BooksSource/store";
+import { bookCategories } from "../category/store";
 export const Dashboard = () => {
   return (
     <div className="flex flex-col p-3 gap-5">
@@ -31,12 +33,11 @@ export const Dashboard = () => {
       <div className="flex md:flex-row flex-col gap-4 justify-between  w-full">
         <CardDashboard
           icon={<LuNotebookText />}
-          title="Total Warga"
-          value={100}
+          title="Total Buku"
+          value={MockBook.length}
         />
-        <CardDashboard title="Total Warga" value={100} />
-        <CardDashboard title="Total Warga" value={100} />
-        <CardDashboard title="Total Warga" value={100} />
+        <CardDashboard title="Total Kategori" value={bookCategories.length} />
+        <CardDashboard title="Total Sumber Buku" value={bookSources.length} />
       </div>
       <div className="flex flex-row justify-between items-center">
         <h1 className="text-xl font-bold">Kelola Buku</h1>
@@ -66,9 +67,9 @@ export const Dashboard = () => {
                     <SelectValue placeholder="Pilih Sumber Buku" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="a">a</SelectItem>
-                    <SelectItem value="b">b</SelectItem>
-                    <SelectItem value="c">c</SelectItem>
+                    {bookSources.map((item) => (
+                      <SelectItem value={item.id}>{item.name}</SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </div>
@@ -79,9 +80,9 @@ export const Dashboard = () => {
                     <SelectValue placeholder="Pilih Kategori" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="a">a</SelectItem>
-                    <SelectItem value="b">b</SelectItem>
-                    <SelectItem value="c">c</SelectItem>
+                    {bookCategories.map((item) => (
+                      <SelectItem value={item.id}>{item.name}</SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </div>

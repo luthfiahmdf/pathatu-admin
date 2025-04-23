@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router';
-import { SortingState } from '@tanstack/react-table';
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router";
+import { SortingState } from "@tanstack/react-table";
 
 export const useTableParams = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  
+
   const initPageIndex = parseInt(searchParams.get("page") || "1");
   const initPageSize = searchParams.get("size") || "10";
   const initSearch = searchParams.get("search") || "";
@@ -14,13 +14,13 @@ export const useTableParams = () => {
   const [pageSize, setPageSize] = useState(initPageSize);
   const [pageIndex, setPageIndex] = useState(initPageIndex - 1);
 
-  const updateUrlParams = (newParams: { 
-    page?: number; 
-    size?: string; 
+  const updateUrlParams = (newParams: {
+    page?: number;
+    size?: string;
     search?: string;
   }) => {
     const current = new URLSearchParams(searchParams);
-    
+
     if (newParams.page) current.set("page", newParams.page.toString());
     if (newParams.size) current.set("size", newParams.size);
     if (newParams.search !== undefined) {
@@ -30,7 +30,7 @@ export const useTableParams = () => {
         current.delete("search");
       }
     }
-    
+
     setSearchParams(current);
   };
 
@@ -53,6 +53,6 @@ export const useTableParams = () => {
     setPageSize,
     pageIndex,
     setPageIndex,
-    updateUrlParams
+    updateUrlParams,
   };
-}; 
+};

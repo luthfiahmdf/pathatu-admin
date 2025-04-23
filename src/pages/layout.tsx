@@ -5,7 +5,6 @@ import { useShowSidebar } from "@/store/sidebar/useShowSidebar";
 import {
   AiOutlineAppstore,
   AiOutlineForm,
-  AiOutlineHdd,
   AiOutlineHistory,
 } from "react-icons/ai";
 import { Outlet } from "react-router";
@@ -20,11 +19,11 @@ export const Layout = () => {
       link: "/dashboard",
       icon: <AiOutlineAppstore />,
     },
-    {
-      name: "Buku",
-      link: "/dashboard/books",
-      icon: <AiOutlineHdd />,
-    },
+    // {
+    //   name: "Buku",
+    //   link: "/dashboard/books",
+    //   icon: <AiOutlineHdd />,
+    // },
     {
       name: "Kategori",
       link: "/dashboard/category",
