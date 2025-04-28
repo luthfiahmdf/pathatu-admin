@@ -23,7 +23,7 @@ export const CategoryPage = () => {
 
   return (
     <div className="flex flex-col p-3 gap-5">
-      <h1 className="text-2xl font-bold" onClick={() => handleClick()}>Kategori</h1>
+      <h1 className="text-2xl font-bold">Kategori</h1>
       <div className="flex flex-row justify-between items-center">
         <h1 className="text-xl font-bold">Kelola Kategori</h1>
         <Dialog>
