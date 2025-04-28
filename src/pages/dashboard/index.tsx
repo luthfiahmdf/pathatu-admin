@@ -29,7 +29,6 @@ export const Dashboard = () => {
   return (
     <div className="flex flex-col p-3 gap-5">
       <h1 className="text-2xl font-bold">Dashboard</h1>
-
       <div className="flex md:flex-row flex-col gap-4 justify-between  w-full">
         <CardDashboard
           icon={<LuNotebookText />}
@@ -61,7 +60,7 @@ export const Dashboard = () => {
                 <Input placeholder="Judul Buku" className="w-full" />
               </div>
               <div className="flex flex-row">
-                <Label className="w-1/3">Sumber Buku</Label>
+                <Label className="w-1/3">Sumber Buku Testing</Label>
                 <Select>
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder="Pilih Sumber Buku" />

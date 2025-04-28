@@ -15,12 +15,15 @@ import { Input } from "@/components/ui/input";
 import { Plus } from "lucide-react";
 import { columns } from "./columns";
 import { bookCategories } from "./store";
-
+//TODO:This Ord That
 export const CategoryPage = () => {
+  const handleClick = () => {
+    console.log("testing")
+  }
+
   return (
     <div className="flex flex-col p-3 gap-5">
-      <h1 className="text-2xl font-bold">Kategori</h1>
-
+      <h1 className="text-2xl font-bold" onClick={() => handleClick()}>Kategori</h1>
       <div className="flex flex-row justify-between items-center">
         <h1 className="text-xl font-bold">Kelola Kategori</h1>
         <Dialog>
