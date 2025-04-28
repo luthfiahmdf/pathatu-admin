@@ -60,7 +60,7 @@ export const Dashboard = () => {
                 <Input placeholder="Judul Buku" className="w-full" />
               </div>
               <div className="flex flex-row">
-                <Label className="w-1/3">Sumber Buku Testing</Label>
+                <Label className="w-1/3">Sumber Buku</Label>
                 <Select>
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder="Pilih Sumber Buku" />
