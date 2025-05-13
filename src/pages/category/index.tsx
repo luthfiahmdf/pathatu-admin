@@ -17,9 +17,6 @@ import { columns } from "./columns";
 import { bookCategories } from "./store";
 //TODO:This Ord That
 export const CategoryPage = () => {
-  const handleClick = () => {
-    console.log("testing")
-  }
 
   return (
     <div className="flex flex-col p-3 gap-5">
