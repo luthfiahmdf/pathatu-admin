@@ -2,6 +2,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { Sidebar } from "@/components/ui/sidebar";
 
 import { useShowSidebar } from "@/store/sidebar/useShowSidebar";
+import { Book } from "lucide-react";
 import {
   AiOutlineAppstore,
   AiOutlineForm,
@@ -24,6 +25,11 @@ export const Layout = () => {
     //   link: "/dashboard/books",
     //   icon: <AiOutlineHdd />,
     // },
+    {
+      name: "Artikel",
+      link: "/dashboard/article",
+      icon: <Book />
+    },
     {
       name: "Kategori",
       link: "/dashboard/category",

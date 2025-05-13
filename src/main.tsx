@@ -8,6 +8,7 @@ import { Dashboard } from "./pages/dashboard";
 import { CategoryPage } from "./pages/category";
 import { BooksPage } from "./pages/books";
 import { BookSourcePage } from "./pages/BooksSource";
+import { ArticlePage } from "./pages/article";
 
 const Router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const Router = createBrowserRouter([
         path: "/dashboard/books-source",
         element: <BookSourcePage />,
       },
+      {
+        path: "/dashboard/article",
+        element: <ArticlePage />
+      }
     ],
   },
 ]);
