@@ -76,7 +76,8 @@ const Editor = () => {
       <RichTextEditor
         output="html"
         content={content}
-        dark={theme === 'light'}
+        dark={theme === "dark"}
+
         onChangeContent={onChangeContent}
         extensions={extensions}
 
