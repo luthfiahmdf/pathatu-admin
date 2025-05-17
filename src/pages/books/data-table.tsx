@@ -1,10 +1,10 @@
+
 import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
   getPaginationRowModel,
-
   getFilteredRowModel,
 } from "@tanstack/react-table";
 
@@ -19,7 +19,6 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -30,7 +29,7 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
-  const [globalFilter, setGlobalFilter] = useState("");
+
 
   const table = useReactTable({
     data,
@@ -38,40 +37,46 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    state: {
-      globalFilter,
+    initialState: {
+      pagination: {
+        pageIndex: 1,
+        pageSize: 10
+      }
     },
-    onGlobalFilterChange: setGlobalFilter,
+
+
+
   });
+
 
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <Input
           placeholder="Cari semua..."
-          value={globalFilter}
-          onChange={(e) => setGlobalFilter(e.target.value)}
+          onChange={(e) => table.setGlobalFilter(e.target.value)}
           className="max-w-sm"
         />
       </div>
-      
+
       <div className="rounded-md border">
         <Table>
           <TableHeader className="bg-orange-50 dark:bg-orange-950/20">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id} className="font-bold text-orange-950 dark:text-orange-100">
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  );
-                })}
+                {headerGroup.headers.map((header) => (
+                  <TableHead
+                    key={header.id}
+                    className="font-bold text-orange-950 dark:text-orange-100"
+                  >
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                  </TableHead>
+                ))}
               </TableRow>
             ))}
           </TableHeader>
@@ -85,14 +90,20 @@ export function DataTable<TData, TValue>({
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
                     </TableCell>
                   ))}
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
                   Tidak ada data.
                 </TableCell>
               </TableRow>
@@ -122,3 +133,4 @@ export function DataTable<TData, TValue>({
     </div>
   );
 }
+
