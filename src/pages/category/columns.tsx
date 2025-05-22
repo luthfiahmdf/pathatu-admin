@@ -1,5 +1,4 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { TCategory } from "./store";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,6 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
+import { TCategory } from "./api";
 
 export const columns: ColumnDef<TCategory>[] = [
   {
@@ -26,7 +26,7 @@ export const columns: ColumnDef<TCategory>[] = [
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original;
+      const id = row.original;
 
       return (
         <DropdownMenu>
@@ -39,9 +39,9 @@ export const columns: ColumnDef<TCategory>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
+              onClick={() => navigator.clipboard.writeText(id.id)}
             >
-              Copy payment ID
+              Copy Cateogory Id
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>View customer</DropdownMenuItem>

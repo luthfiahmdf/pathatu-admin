@@ -1,7 +1,6 @@
 import { CardDashboard } from "@/components/ui/card-dashboard";
 import { LuNotebookText } from "react-icons/lu";
 import { columns } from "./columns";
-import { MockBook } from "./store";
 import {
   Dialog,
   DialogContent,
@@ -22,21 +21,34 @@ import {
 } from "@/components/ui/select";
 
 import { DataTable } from "@/components/data-table";
-import { bookSources } from "../BooksSource/store";
-import { bookCategories } from "../category/store";
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { VSbookSchema } from "./bookSchema";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
+import { useSearchParams } from "react-router";
+import { useCreateBook, useGetBooks } from "./hook";
+import { TBook } from "./api";
+import { useGetCategory } from "../category/hook";
+import { useGetBookSource } from "../BooksSource/hook";
 export const Dashboard = () => {
 
-
+  const [params] = useSearchParams()
+  const { data: category } = useGetCategory()
+  const { data: bookSource } = useGetBookSource()
+  const { mutate } = useCreateBook()
+  const { data } = useGetBooks({
+    page: Number(params.get('page')) || 1,
+    size: Number(params.get('size')) || 10,
+    search: params.get('search') || undefined
+  });
   const form = useForm<z.infer<typeof VSbookSchema>>({
     resolver: zodResolver(VSbookSchema),
   });
   const handleSubmit = (values: z.infer<typeof VSbookSchema>) => {
-    console.log(values)
+    mutate(values, {
+      onSuccess: () => console.log("success"),
+    })
   }
   return (
     <div className="flex flex-col p-3 gap-5">
@@ -45,10 +57,10 @@ export const Dashboard = () => {
         <CardDashboard
           icon={<LuNotebookText />}
           title="Total Buku"
-          value={MockBook.length}
+          value={data?.totalBooks ?? 0 as number}
         />
-        <CardDashboard title="Total Kategori" value={bookCategories.length} />
-        <CardDashboard title="Total Sumber Buku" value={bookSources.length} />
+        <CardDashboard title="Total Kategori" value={10} />
+        <CardDashboard title="Total Sumber Buku" value={10} />
       </div>
       <div className="flex flex-row justify-between items-center">
         <h1 className="text-xl font-bold">Kelola Buku</h1>
@@ -82,11 +94,9 @@ export const Dashboard = () => {
                       </FormItem>
                     )}
                   />
-
-
                   <FormField
                     control={form.control}
-                    name="bookSource"
+                    name="bookSourceId"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="w-1/3">Sumber Buku</FormLabel>
@@ -96,7 +106,7 @@ export const Dashboard = () => {
                               <SelectValue placeholder="Pilih Sumber Buku" />
                             </SelectTrigger>
                             <SelectContent>
-                              {bookSources.map((item, index) => (
+                              {bookSource?.map((item, index) => (
                                 <SelectItem key={index} value={item.id}>{item.name}</SelectItem>
                               ))}
                             </SelectContent>
@@ -108,10 +118,9 @@ export const Dashboard = () => {
 
                   <FormField
                     control={form.control}
-                    name="category"
+                    name="categoryId"
                     render={({ field }) => (
                       <FormItem>
-
                         <FormLabel className="w-1/3">Kategori</FormLabel>
                         <FormControl>
                           <Select onValueChange={field.onChange}>
@@ -119,7 +128,7 @@ export const Dashboard = () => {
                               <SelectValue placeholder="Pilih Sumber Buku" />
                             </SelectTrigger>
                             <SelectContent>
-                              {bookCategories.map((item, index) => (
+                              {category?.data.map((item, index) => (
                                 <SelectItem key={index} value={item.id}>{item.name}</SelectItem>
                               ))}
                             </SelectContent>
@@ -140,8 +149,7 @@ export const Dashboard = () => {
           </form>
         </Form>
       </div>
-
-      <DataTable columns={columns} data={MockBook} />
+      <DataTable columns={columns} data={data?.data as TBook[]} totalData={data?.pagination?.total as number} />
     </div>
   );
 };

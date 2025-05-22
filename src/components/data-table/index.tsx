@@ -21,18 +21,30 @@ import { Search } from "lucide-react";
 import { Input } from "../ui/input";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
-  data: TData[];
+  data?: TData[];
+  totalData: number,
+  pageSize?: number
 }
 
 export function DataTable<TData, TValue>({
   columns,
-  data,
+  data = [],
+  totalData
 }: DataTableProps<TData, TValue>) {
 
 
   const [query] = useSearchParams();
   const navigate = useNavigate();
   const { pathname } = useLocation();
+
+  const pageSize = Number(query.get('size')) || 10;
+  const initialState = {
+    pagination: {
+      pageIndex: Number(query.get('page')) || 0,
+      pageSize: Number(query.get('size')) || 10,
+    },
+    globalFilter: query.get('search') || '',
+  };
   const stateAndOnChanges = useTableSearchParams(
     { query, pathname, replace: (url) => navigate(url, { replace: true }) },
     {
@@ -43,18 +55,23 @@ export function DataTable<TData, TValue>({
           pageSize: "size",
         },
       },
+      debounceMilliseconds: {
+        globalFilter: 1000,
+      }
     },
   );
   const table = useReactTable({
-    data,
+    data: data || [],
     columns,
+    initialState,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    manualPagination: true,
+    pageCount: Math.ceil(totalData / pageSize),
     ...stateAndOnChanges,
   });
-
 
 
   return (
@@ -99,13 +116,15 @@ export function DataTable<TData, TValue>({
       <div className="flex flex-col sm:flex-row items-center gap-4 justify-between">
         <div className="text-sm text-muted-foreground">
           Menmpilkan {table.getRowModel().rows.length.toLocaleString()} dari{" "}
-          {table.getRowCount().toLocaleString()} Data
+          {totalData} Data
         </div>
         <div className="flex items-center space-x-2">
           <Button
             variant="outline"
             size="sm"
-            onClick={() => table.previousPage()}
+            onClick={() => {
+              table.previousPage();
+            }}
             disabled={!table.getCanPreviousPage()}
             className="hover:bg-orange-50 hover:text-orange-600"
           >
@@ -121,7 +140,9 @@ export function DataTable<TData, TValue>({
           <Button
             variant="outline"
             size="sm"
-            onClick={() => table.nextPage()}
+            onClick={() => {
+              table.nextPage();
+            }}
             disabled={!table.getCanNextPage()}
             className="hover:bg-orange-50 hover:text-orange-600"
           >
