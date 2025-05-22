@@ -22,7 +22,7 @@ import { Input } from "../ui/input";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data?: TData[];
-  totalData: number,
+  totalData?: number,
   pageSize?: number
 }
 
@@ -69,7 +69,7 @@ export function DataTable<TData, TValue>({
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     manualPagination: true,
-    pageCount: Math.ceil(totalData / pageSize),
+    pageCount: Math.ceil(totalData as number / pageSize),
     ...stateAndOnChanges,
   });
 
