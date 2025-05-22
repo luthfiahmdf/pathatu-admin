@@ -14,10 +14,16 @@ import { Input } from "@/components/ui/input";
 
 import { Plus } from "lucide-react";
 import { columns } from "./columns";
-import { bookCategories } from "./store";
-//TODO:This Ord That
+import { useGetCategory } from "./hook";
+import { useSearchParams } from "react-router";
+import { TCategory } from "./api";
 export const CategoryPage = () => {
-
+  const [params] = useSearchParams()
+  const { data } = useGetCategory({
+    page: Number(params.get('page')) || 1,
+    size: Number(params.get('size')) || 10,
+    search: params.get('search') || undefined
+  });
   return (
     <div className="flex flex-col p-3 gap-5">
       <h1 className="text-2xl font-bold">Kategori</h1>
@@ -55,7 +61,7 @@ export const CategoryPage = () => {
         </Dialog>
       </div>
 
-      <DataTable columns={columns} data={bookCategories} />
+      <DataTable columns={columns} data={data?.data as TCategory[]} totalData={data?.pagination?.total as number} />
     </div>
   );
 };

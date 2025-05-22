@@ -70,17 +70,14 @@ const Editor = () => {
     <div >
       <div className="flex">
         <button className="bg-amber-400 p-3 rounded-full w-full" onClick={() => console.log(content)}> Kirim</button>
-
       </div>
 
       <RichTextEditor
         output="html"
         content={content}
         dark={theme === "dark"}
-
         onChangeContent={onChangeContent}
         extensions={extensions}
-
       />
 
     </div>

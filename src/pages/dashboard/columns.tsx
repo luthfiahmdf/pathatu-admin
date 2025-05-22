@@ -9,17 +9,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
+import { TBook } from "./api";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type Payment = {
-  id: string;
-  title: string;
-  bookSource: string;
-  category: string;
-};
-
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<TBook>[] = [
   {
     header: "No",
     cell: ({ row }) => row.index + 1,
@@ -30,20 +24,19 @@ export const columns: ColumnDef<Payment>[] = [
     enableSorting: true,
   },
   {
-    accessorKey: "bookSource",
+    accessorKey: "bookSourceName",
     header: "Sumber Buku",
     enableSorting: true,
   },
   {
-    accessorKey: "category",
+    accessorKey: "categoryName",
     header: "Kategori",
     enableSorting: true,
   },
   {
     id: "actions",
     enableHiding: false,
-    cell: ({ row }) => {
-      const payment = row.original;
+    cell: () => {
 
       return (
         <DropdownMenu>
@@ -56,7 +49,6 @@ export const columns: ColumnDef<Payment>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
             >
               Copy payment ID
             </DropdownMenuItem>

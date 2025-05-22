@@ -9,7 +9,19 @@ import { CategoryPage } from "./pages/category";
 import { BooksPage } from "./pages/books";
 import { BookSourcePage } from "./pages/BooksSource";
 import { ArticlePage } from "./pages/article";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { Suspense } from "react";
 
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // 5 menit
+      gcTime: 30 * 60 * 1000, // 30 menit
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 const Router = createBrowserRouter([
   {
     path: "/",
@@ -42,7 +54,11 @@ const Router = createBrowserRouter([
   },
 ]);
 createRoot(document.getElementById("root")!).render(
-  <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-    <RouterProvider router={Router} />
-  </ThemeProvider>
+  <QueryClientProvider client={queryClient}>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <Suspense fallback={<div>loading...</div>}>
+        <RouterProvider router={Router} />
+      </Suspense>
+    </ThemeProvider>
+  </QueryClientProvider>
 );
